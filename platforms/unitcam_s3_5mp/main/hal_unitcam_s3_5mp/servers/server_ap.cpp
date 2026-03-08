@@ -37,8 +37,8 @@ void HAL_UnitCamS3_5MP::startApServer()
 
     // Load page
     _server->on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
-        AsyncWebServerResponse* response =
-            request->beginResponse_P(200, "text/html", AssetPool::GetImage().index_html_gz, 234419);
+        AsyncWebServerResponse* response = request->beginResponse_P(
+            200, "text/html", AssetPool::GetImage().index_html_gz, sizeof(AssetPool::GetImage().index_html_gz));
         response->addHeader("Content-Encoding", "gzip");
         request->send(response);
     });

@@ -461,6 +461,9 @@ public:
     static void StartPosterServer() { Get()->startPosterServer(); }
     virtual void startPosterServer() {}
 
+    static void StartStaWebServer() { Get()->startStaWebServer(); }
+    virtual void startStaWebServer() {}
+
     /* -------------------------------------------------------------------------- */
     /*                                     SD                                     */
     /* -------------------------------------------------------------------------- */

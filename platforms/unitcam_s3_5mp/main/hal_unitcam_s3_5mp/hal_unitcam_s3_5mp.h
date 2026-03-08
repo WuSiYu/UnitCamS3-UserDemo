@@ -55,6 +55,7 @@ public:
     void startApServer() override;
     void stopApServer() override;
     void startPosterServer() override;
+    void startStaWebServer() override;
 
     bool sdCardInit(bool passImagePath) override;
     bool sdCardDeInit() override;
