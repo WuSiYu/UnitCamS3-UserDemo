@@ -17,6 +17,6 @@
 struct ImagePool_t
 {
     /* ----------------------- Add your image define here ----------------------- */
-    uint8_t index_html_gz[235347];
+    uint8_t index_html_gz[233951];
     uint8_t m5_logo[17062];
 };
