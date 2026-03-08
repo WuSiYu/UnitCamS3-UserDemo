@@ -138,7 +138,30 @@ void startPoster(AsyncWebServerRequest* request)
     request->send(200, "application/json", "{\"msg\":\"ok\"}");
 }
 
-void load_poster_apis(AsyncWebServer& server) { server.on("/api/v1/start_poster", HTTP_GET, startPoster); }
+static void _task_start_sta_web(void* param)
+{
+    delay(500);
+    spdlog::info("start sta web server mode");
+    HAL::GetSystemConfig().startPoster = "sta_web";
+    HAL::SaveSystemConfig();
+
+    delay(300);
+    esp_restart();
+    delay(10000);
+    vTaskDelete(NULL);
+}
+
+void startStaWeb(AsyncWebServerRequest* request)
+{
+    xTaskCreate(_task_start_sta_web, "reboot", 4000, NULL, 15, NULL);
+    request->send(200, "application/json", "{\"msg\":\"ok\"}");
+}
+
+void load_poster_apis(AsyncWebServer& server)
+{
+    server.on("/api/v1/start_poster", HTTP_GET, startPoster);
+    server.on("/api/v1/start_sta_web", HTTP_GET, startStaWeb);
+}
 
 void start_poster_task()
 {

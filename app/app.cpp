@@ -56,6 +56,8 @@ void APP::Setup(SetupCallback_t callback)
     // Simple
     if (HAL::GetSystemConfig().startPoster == "yes")
         HAL::StartPosterServer();
+    else if (HAL::GetSystemConfig().startPoster == "sta_web")
+        HAL::StartStaWebServer();
     else
         HAL::StartApServer();
 
