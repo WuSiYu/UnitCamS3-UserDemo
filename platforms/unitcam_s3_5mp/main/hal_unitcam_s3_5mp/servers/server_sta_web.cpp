@@ -22,17 +22,20 @@
 
 static AsyncWebServer* _sta_server = nullptr;
 
+static constexpr uint32_t AP_WAIT_TIMEOUT_MS = 10000;
+static constexpr uint32_t WIFI_CONNECT_TIMEOUT_MS = 30000;
+
 void HAL_UnitCamS3_5MP::startStaWebServer()
 {
     spdlog::info("start sta web server");
 
-    // Start AP for 10 seconds to allow reconfiguration
+    // Start AP for AP_WAIT_TIMEOUT_MS seconds to allow reconfiguration
     spdlog::info("start ap for 10s");
     startApServer();
 
     uint32_t ap_wait_time_count = millis();
     bool led_state = true;
-    while (millis() - ap_wait_time_count < 10000)
+    while (millis() - ap_wait_time_count < AP_WAIT_TIMEOUT_MS)
     {
         // If get client
         if (WiFi.softAPgetStationNum() != 0)
@@ -88,7 +91,7 @@ void HAL_UnitCamS3_5MP::startStaWebServer()
                 }
 
                 // Time out
-                if (millis() - time_count > 30000UL)
+                if (millis() - time_count > WIFI_CONNECT_TIMEOUT_MS)
                 {
                     spdlog::error("connect failed, reboot..");
 

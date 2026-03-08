@@ -129,8 +129,8 @@ export default function CardPosterConfig() {
       wifiPass: userConfig.wifiPass,
       startPoster: "no",
       nickname: userConfig.nickname,
-      postInterval: parseInt(userConfig.postInterval) || 5,
-      timeZone: userConfig.timeZone || "GMT+0",
+      postInterval: parseInt(userConfig.postInterval),
+      timeZone: userConfig.timeZone,
     });
     console.log("config json:");
     console.log(configJson);
